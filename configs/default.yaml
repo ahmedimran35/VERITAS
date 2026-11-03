@@ -1,0 +1,36 @@
+# VERITAS experiment configuration
+
+federated:
+  clients: 4
+  rounds: 200
+  non_iid: dirichlet        # Dirichlet partition of NuminaMath-CoT by source
+  dirichlet_alpha: 0.3
+
+model:
+  name: Qwen/Qwen2.5-0.5B-Instruct   # small for the pilot; scale later
+  group_size: 8             # GRPO answers sampled per prompt
+  reward: math_verify       # rule-based exact-match reward
+
+dataset:
+  name: AI-MO/NuminaMath-CoT
+  subset_size: 20000        # small subset for the cheap pilot
+
+defense:                    # maps to src/veritas/aggregate.py DEFAULT_CFG
+  tau: 3.0                  # consistency flag threshold (MAD z-score)
+  mode: ratio               # ratio | theilsen
+  mu_method: median         # median | trimmed | mean
+  w_cap: 0.4
+  update_agg: trimmed       # weighted | trimmed | krum
+  trim: 1
+  n_byz: 1
+  use_reputation: true
+
+attack:
+  type: A1_sigma_inflation  # honest | A1_sigma_inflation | A2_mu_poison | A3_adaptive
+  n_liars: 1
+  sigma_factor: 1000.0
+  mu_shift: 5.0
+
+eval:
+  seeds: [0, 1, 2]
+  tau_sweep: [0.5, 8.0, 25]   # start, stop, n (for the ROC curve)
