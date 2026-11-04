@@ -4,7 +4,15 @@
 
 > Detecting lying clients in Federated GRPO — a reward-statistics poisoning attack and a server-side consistency defense.
 
-**Status:** early research / pilot. The defense primitives and the synthetic proof-of-mechanism run today on CPU. The full GRPO-on-LLM integration is stubbed for the GPU phase. No results here are claims yet — they are a plan plus runnable scaffolding.
+**Status:** pilot complete ✅. On a real federated GRPO model (Qwen2.5-0.5B + LoRA, GSM8K, 4 non-IID clients), the lying-client attack collapses global accuracy and the VERITAS defense detects the liar and recovers it:
+
+| scenario | accuracy | detection |
+|---|---|---|
+| honest | 0.200 | — |
+| **attack** (lying client) | **0.013** (−0.188) | — |
+| **defense** (VERITAS) | **0.225** (recovered) | liar flagged, 0 false positives |
+
+See [`results/`](results/) for figures and [`results/RESULTS.md`](results/RESULTS.md). Next: the full NuminaMath-CoT run.
 
 ---
 
@@ -58,8 +66,8 @@ Plus ablations: number of liars, lie strength, non-IID degree, seeds (mean ± st
 
 - [x] Defense primitives (`src/veritas/`) — real, tested.
 - [x] Synthetic proof-of-mechanism (`experiments/synthetic_sim.py`) — CPU, no GPU.
-- [ ] Small GPU pilot: Qwen2.5-0.5B + NuminaMath subset via TRL `GRPOTrainer`, 4 clients (`fedgrpo/`).
-- [ ] Full run matrix + ROC + ablations.
+- [x] GPU pilot: Qwen2.5-0.5B + GSM8K via TRL `GRPOTrainer`, 4 clients — attack + defense + detection demonstrated (`experiments/step34_controlled.py`, `step5_sweeps.py`, `results/`).
+- [ ] Full run on NuminaMath-CoT: multi-round, more clients/steps, seeds, μ-poison (A2) + adaptive (A3), full metric matrix + ablations (~12 figures, 4 tables).
 - [ ] Write-up.
 
 ## 8. Repo layout

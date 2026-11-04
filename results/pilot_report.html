@@ -1,0 +1,106 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>VERITAS — Pilot Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5efe3; --bg2:#ece2d0; --panel:#fffcf5; --panel2:#f7f0e2;
+  --ink:#2a241d; --muted:#7a6f60; --faint:#a89a86; --line:#e8dec9; --line2:#daccb2;
+  --sys:#5c4733; --sys-soft:#ece0cf; --accent:#b05a2a; --accent-soft:#f4e2d1;
+  --olive:#5f7138; --olive-soft:#e8ecd4; --rust:#bf3b2a; --rust-soft:#f7ddd3;
+  --gold:#bb8622; --gold-soft:#f6ead0; color-scheme:light;
+  --d:"Fraunces",Georgia,serif; --b:"Hanken Grotesk",system-ui,sans-serif; --m:"Roboto Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1a1611;--bg2:#13100c;--panel:#221d16;--panel2:#29231b;--ink:#f0e8db;--muted:#b1a593;--faint:#80755f;
+  --line:#352d22;--line2:#423829;--sys:#d8bd97;--sys-soft:#2c2318;--accent:#e08a4f;--accent-soft:#352413;
+  --olive:#9fb268;--olive-soft:#1e2614;--rust:#ea6a53;--rust-soft:#301611;--gold:#e0ad4b;--gold-soft:#2c2410;color-scheme:dark;}}
+:root[data-theme="dark"]{--bg:#1a1611;--bg2:#13100c;--panel:#221d16;--panel2:#29231b;--ink:#f0e8db;--muted:#b1a593;--faint:#80755f;
+  --line:#352d22;--line2:#423829;--sys:#d8bd97;--sys-soft:#2c2318;--accent:#e08a4f;--accent-soft:#352413;
+  --olive:#9fb268;--olive-soft:#1e2614;--rust:#ea6a53;--rust-soft:#301611;--gold:#e0ad4b;--gold-soft:#2c2410;color-scheme:dark;}
+*{box-sizing:border-box} html,body{margin:0}
+body{background:radial-gradient(1100px 620px at 82% -4%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 60%),
+  radial-gradient(880px 560px at 2% 104%,color-mix(in srgb,var(--gold) 12%,transparent),transparent 55%),
+  linear-gradient(162deg,var(--bg),var(--bg2));min-height:100vh;color:var(--ink);font-family:var(--b);line-height:1.6;
+  -webkit-font-smoothing:antialiased;padding:max(24px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(40px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.wrap{max-width:820px;margin:0 auto}
+.eyebrow{display:inline-flex;gap:8px;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);padding:5px 13px;border-radius:999px}
+h1{font-family:var(--d);font-weight:600;font-size:clamp(30px,6.4vw,46px);line-height:1.04;margin:14px 0 8px;letter-spacing:-.015em}
+.lead{color:var(--muted);font-size:clamp(15px,3.5vw,17px);max-width:62ch;margin:0}
+section{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:18px;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 20px 44px -30px rgba(40,30,15,.5)}
+.kick{display:inline-block;font-family:var(--m);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--accent);
+  background:var(--accent-soft);padding:3px 9px;border-radius:7px;margin-bottom:10px}
+h2{font-family:var(--d);font-weight:600;font-size:clamp(20px,4.4vw,25px);margin:0 0 10px;letter-spacing:-.01em}
+p{margin:0 0 12px;font-size:15px;color:color-mix(in srgb,var(--ink) 88%,var(--muted))} p:last-child{margin-bottom:0}
+b{color:var(--ink);font-weight:600}
+.mono{font-family:var(--m);font-size:.9em;background:var(--panel2);padding:1px 6px;border-radius:5px;border:1px solid var(--line)}
+table{width:100%;border-collapse:separate;border-spacing:0;margin-top:6px;font-size:14.5px;border:1px solid var(--line2);border-radius:14px;overflow:hidden}
+th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line)} thead th{background:var(--panel2);font-weight:700;font-size:13px}
+tr:last-child td{border-bottom:none}
+td.hl{font-weight:700} .k-rust{color:var(--rust)} .k-gold{color:var(--gold)} .k-olive{color:var(--olive)}
+figure{margin:14px 0 4px}
+figure img{width:100%;height:auto;display:block;border:1px solid var(--line2);border-radius:14px;background:#fff}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.note{margin-top:18px;background:var(--gold-soft);border:1px solid color-mix(in srgb,var(--gold) 40%,transparent);border-radius:16px;padding:16px 18px;font-size:14.5px}
+.note b{color:var(--gold)}
+ul{margin:4px 0 0;padding-left:20px} li{margin:5px 0;font-size:14.5px;color:color-mix(in srgb,var(--ink) 88%,var(--muted))}
+.foot{margin-top:22px;text-align:center;color:var(--faint);font-size:12.5px}
+</style>
+<div class="wrap">
+  <span class="eyebrow">VERITAS · Pilot results · 4 Nov 2026</span>
+  <h1>Lying clients in Federated GRPO — it works</h1>
+  <p class="lead">First end-to-end run on a real federated GRPO model: the attack collapses the model, and the VERITAS defense detects the liar and restores accuracy. Pilot scale (proof-of-mechanism) — the full NuminaMath-CoT run comes next.</p>
+
+  <section>
+    <span class="kick">headline result</span>
+    <h2>Attack → Defense, on a real model</h2>
+    <p>Qwen2.5-0.5B + LoRA, 4 clients (non-IID GSM8K), σ-weighted Fed-GRPO aggregation. One lying client sends a sign-flipped, amplified poison update and a fake σ to grab the aggregation weight.</p>
+    <table>
+      <thead><tr><th>Scenario</th><th>Global accuracy</th><th>Detection</th></tr></thead>
+      <tbody>
+        <tr><td>Honest baseline</td><td class="hl">0.200</td><td>—</td></tr>
+        <tr><td><b class="k-rust">Attack</b> (lying client)</td><td class="hl k-rust">0.013 &nbsp;(−0.188)</td><td>—</td></tr>
+        <tr><td><b class="k-gold">Defense</b> (VERITAS)</td><td class="hl k-gold">0.225 &nbsp;(recovered)</td><td><b class="k-olive">liar flagged · 0 false positives</b></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px">The liar destroys <b>94%</b> of the model's accuracy. VERITAS flags exactly the liar (no honest client wrongly flagged) and restores accuracy to the honest level.</p>
+  </section>
+
+  <section>
+    <span class="kick">figure 1</span>
+    <h2>Attack strength vs accuracy</h2>
+    <figure><img src="fig1.png" alt="attack strength vs accuracy">
+      <figcaption>Weak attacks are harmless; past a threshold the model collapses toward zero. The VERITAS line stays flat at the honest level regardless of attack strength.</figcaption></figure>
+  </section>
+
+  <section>
+    <span class="kick">figure 2</span>
+    <h2>The attacker's dilemma</h2>
+    <figure><img src="fig2.png" alt="detection vs sigma inflation">
+      <figcaption>As the liar inflates σ it gains aggregation weight — but becomes easier to flag (red). Note the blind spot when σ-inflation matches the update boost (green): an adaptive attacker can evade the ratio check, which is exactly why the defense keeps a norm-based layer (Krum / trimmed-mean).</figcaption></figure>
+  </section>
+
+  <section>
+    <span class="kick">figure 3</span>
+    <h2>Detector is robust to tuning</h2>
+    <figure><img src="fig3.png" alt="threshold sensitivity">
+      <figcaption>For the strong attack, the liar is caught (TPR = 1) with zero false positives (FPR = 0) across every threshold τ — no delicate tuning required.</figcaption></figure>
+  </section>
+
+  <section>
+    <span class="kick">honest notes</span>
+    <h2>What this is — and isn't</h2>
+    <ul>
+      <li>Pilot scale: GSM8K, 0.5B, single round. The honest baseline doesn't yet improve over init (too few steps) — a learning baseline needs the larger run.</li>
+      <li>This de-risks the expensive run: the attack, the defense, and the detection all work on real hardware.</li>
+      <li>Figure 2 exposes a real adaptive-attack blind spot → the norm-based defense layer must stay active at scale.</li>
+    </ul>
+  </section>
+
+  <div class="note"><b>Next — the real run:</b> NuminaMath-CoT (~860k), multi-round, more clients and steps, several seeds, the μ-poison and adaptive attacks, and the full metric matrix + ablations (~12 figures, 4 tables). Same code, scaled up.</div>
+
+  <p class="foot">VERITAS · Verifying reward statistics in federated GRPO · pilot on Qwen2.5-0.5B + GSM8K</p>
+</div>
